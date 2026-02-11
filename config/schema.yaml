@@ -1,61 +1,75 @@
 columns:
- - NPA Status
- - RevolvingUtilizationOfUnsecuredLines
- - age
- - Gender
- - Region
- - MonthlyIncome
- - Education
- - Rented_OwnHouse
- - Occupation
- - NumberOfTime30-59DaysPastDueNotWorse
- - DebtRatio
- - MonthlyIncome.1
- - NumberOfOpenCreditLinesAndLoans
- - NumberOfTimes90DaysLate
- - NumberRealEstateLoansOrLines
- - NumberOfTime60-89DaysPastDueNotWorse
- - NumberOfDependents
- - Good_Bad
+  - NPA Status
+  - RevolvingUtilizationOfUnsecuredLines
+  - age
+  - Gender
+  - Region
+  - MonthlyIncome
+  - Education
+  - Rented_OwnHouse
+  - Occupation
+  - NumberOfTime30-59DaysPastDueNotWorse
+  - DebtRatio
+  - MonthlyIncome.1
+  - NumberOfOpenCreditLinesAndLoans
+  - NumberOfTimes90DaysLate
+  - NumberRealEstateLoansOrLines
+  - NumberOfTime60-89DaysPastDueNotWorse
+  - NumberOfDependents
+  - Good_Bad
 
+# -------------------------
+# TARGET
+# -------------------------
+target_column: Good_Bad
+
+# -------------------------
+# REQUIRED BY DataValidation
+# -------------------------
 numerical_columns:
- - NPA Status
- - RevolvingUtilizationOfUnsecuredLines
- - age
- - MonthlyIncome
- - NumberOfTime30-59DaysPastDueNotWorse
- - DebtRatio
- - MonthlyIncome.1
- - NumberOfOpenCreditLinesAndLoans
- - NumberOfTimes90DaysLate
- - NumberRealEstateLoansOrLines
- - NumberOfTime60-89DaysPastDueNotWorse
+  - NPA Status
+  - RevolvingUtilizationOfUnsecuredLines
+  - age
+  - MonthlyIncome
+  - NumberOfTime30-59DaysPastDueNotWorse
+  - DebtRatio
+  - NumberOfOpenCreditLinesAndLoans
+  - NumberOfTimes90DaysLate
+  - NumberRealEstateLoansOrLines
+  - NumberOfTime60-89DaysPastDueNotWorse
 
 categorical_columns:
-  -Gender
- - Region
- - Rented_OwnHouse
- - Occupation
- - Education
- - NumberOfDependents
- - Good_Bad
+  - Gender
+  - Region
+  - Rented_OwnHouse
+  - Occupation
+  - Education
+  - NumberOfDependents
 
+# -------------------------
+# REQUIRED BY DataTransformation
+# -------------------------
 num_features:
- - NPA Status
- - RevolvingUtilizationOfUnsecuredLines
- - age
- - MonthlyIncome
- - NumberOfTime30-59DaysPastDueNotWorse
- - DebtRatio
- - MonthlyIncome.1
- - NumberOfOpenCreditLinesAndLoans
- - NumberOfTimes90DaysLate
- - NumberRealEstateLoansOrLines
- - NumberOfTime60-89DaysPastDueNotWorse
+  - NPA Status
+  - RevolvingUtilizationOfUnsecuredLines
+  - age
+  - MonthlyIncome
+  - NumberOfTime30-59DaysPastDueNotWorse
+  - DebtRatio
+  - NumberOfOpenCreditLinesAndLoans
+  - NumberOfTimes90DaysLate
+  - NumberRealEstateLoansOrLines
+  - NumberOfTime60-89DaysPastDueNotWorse
+
+oh_columns:
+  - Gender
+  - Region
 
 or_columns:
- - Rented_OwnHouse
-oh_columns:
+  - Rented_OwnHouse
 
- - Gender
- - Region
+# -------------------------
+# DROP COLUMNS
+# -------------------------
+drop_columns:
+  - MonthlyIncome.1

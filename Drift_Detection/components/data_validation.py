@@ -81,33 +81,29 @@ class DataValidation:
         except Exception as e:
             raise USvisaException(e, sys)
 
-    def detect_dataset_drift(self, reference_df: DataFrame, current_df: DataFrame, ) -> bool:
-        """
-        Method Name :   detect_dataset_drift
-        Description :   This method validates if drift is detected
-        
-        Output      :   Returns bool value based on validation results
-        On Failure  :   Write an exception log and then raise an exception
-        """
+    def detect_dataset_drift(self, reference_df: DataFrame, current_df: DataFrame) -> bool:
         try:
-            data_drift_profile = Profile(sections=[DataDriftProfileSection()])
+            numerical_cols = self._schema_config["numerical_columns"]
 
+            reference_df = reference_df[numerical_cols]
+            current_df = current_df[numerical_cols]
+
+            data_drift_profile = Profile(sections=[DataDriftProfileSection()])
             data_drift_profile.calculate(reference_df, current_df)
 
             report = data_drift_profile.json()
             json_report = json.loads(report)
 
-            write_yaml_file(file_path=self.data_validation_config.drift_report_file_path, content=json_report)
+            write_yaml_file(
+                file_path=self.data_validation_config.drift_report_file_path,
+                content=json_report
+            )
 
-            n_features = json_report["data_drift"]["data"]["metrics"]["n_features"]
-            n_drifted_features = json_report["data_drift"]["data"]["metrics"]["n_drifted_features"]
-
-            logging.info(f"{n_drifted_features}/{n_features} drift detected.")
             drift_status = json_report["data_drift"]["data"]["metrics"]["dataset_drift"]
             return drift_status
-        except Exception as e:
-            raise USvisaException(e, sys) from e
 
+        except Exception as e:
+            raise USvisaException(e, sys)
     def initiate_data_validation(self) -> DataValidationArtifact:
         """
         Method Name :   initiate_data_validation
