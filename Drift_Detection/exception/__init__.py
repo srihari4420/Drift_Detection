@@ -10,7 +10,11 @@ def error_message_detail(error, error_detail:sys):
 
     return error_message
 
+<<<<<<< HEAD
 class USvisaException(Exception):
+=======
+class detection(Exception):
+>>>>>>> a14bc35 (fixed x_train_perfect issue)
     def __init__(self, error_message, error_detail):
         """
         :param error_message: error message in string format
